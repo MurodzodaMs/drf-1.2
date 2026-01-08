@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # local apps
     'task.apps.TaskConfig',
-
-    'rest_framework'
+    'accounts.apps.AccountsConfig',
+    # 3rd apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,19 @@ USE_I18N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'task.CustomUser'
+
+
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES":[
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    "DEFAULT_PREMISSION_CLASSES":[
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
