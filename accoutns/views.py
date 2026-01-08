@@ -1,5 +1,5 @@
-from rest_framework import generics, status
-from rest_framework.decorators import api_view
+from rest_framework import generics, status, permissions
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from .models import *
@@ -9,9 +9,11 @@ from .serializers import *
 class RegisterAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 @api_view(['POST'])
+@permission_classes([permissions.AllowAny])
 def login_api_view(request):
     if request.method == 'POST':
         username = request.data.get('username')
